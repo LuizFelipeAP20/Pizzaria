@@ -13,16 +13,18 @@ app.use(express.json())
 app.use(cors())
 
 
-let db = [
-  { '1': { Produto: 'produto 1', Valor: '20'}},
-  { '2': { Produto: 'produto 2', Valor: '20'}},
-  { '3': { Produto: 'produto 3', Valor: '20'}}
+let dbC = [
+  { '1': { Nome: 'Calabresa', Desc: 'Uma pizza simples, mas que conquistou uma legião de fãs em todo o mundo. Está presente em mais de 30% dos pedidos.'}},
+  { '2': { Nome: 'Portuguesa', Desc: 'Ovos, cebola, azeitona, ervilha, queijo e presunto dão sabor a segunda pizza mais queridinha dos brasileiros.'}},
+  { '3': { Nome: 'Marguerita', Desc: 'Sabor ícone da Itália que leva apenas molho, muçarela, tomate e manjericão. É uma ótima opção para quem não come carne.'}},
+  { '4': { Nome: 'Frango com catupiry', Desc: 'A mistura de proteína e cremosidade que deu muito certo.'}},
+  { '5': { Nome: 'Muçarela', Desc: 'Simples e perfeita como tem que ser. A número 1 entre os paulistanos.'}},
+  { '6': { Nome: 'Napolitana', Desc: 'Um sabor genuinamente italiano que não pode faltar na sua pizzaria.'}}
 ]
 
 let db2 = [
-  { '1': { Nome: 'Felipe', Senha: '120'}},
-  { '2': { Nome: 'Maria', Senha: '220'}},
-  { '3': { Nome: 'Karen', Senha: '1220'}}
+  { '1': { Nome: 'felipe', Senha: '1234'}},
+  { '2': { Nome: 'karen', Senha: '123'}}
 ]
 let db3Prod = [
   { '1': { Nome: 'Calabresa', Desc: 'Uma pizza simples, mas que conquistou uma legião de fãs em todo o mundo. Está presente em mais de 30% dos pedidos.'}},
@@ -40,7 +42,7 @@ app.get('/users', function(req,res){
 })
 
 app.get('/', function(req,res){
- return res.json(db)
+ return res.send("BD")
 })
 
 app.get('/logar/:usuario/:senha', function(req,res){
@@ -52,6 +54,16 @@ app.get('/logar/:usuario/:senha', function(req,res){
   }else {
     res.end("Credenciais inválidas!");
   }
+})
+app.get("/compra/:id", function(req,res){
+  const id = req.params.id
+
+let newDB = db3Prod.filter(item => {
+  if(item[id])
+    return item
+})
+return res.send(newDB)
+dbC = newDB;
 })
 
 app.post('/add', function(req, res){
