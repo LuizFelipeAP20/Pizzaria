@@ -62,8 +62,8 @@ let newDB = db3Prod.filter(item => {
   if(item[id])
     return item
 })
-return res.send(newDB)
 dbC = newDB;
+return res.send(dbC)
 })
 
 app.post('/add', function(req, res){
